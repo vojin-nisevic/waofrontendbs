@@ -1,25 +1,23 @@
 
-<!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
 
-<!--<app-header (click)="openSideBar()"></app-header>-->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
     <i class="bi bi-list"></i>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#" (click)="openSideBar()">WAO</a>
+    <a class="navbar-brand"  role="button" aria-controls="sideBar">WAO</a>
     <span><i class="bi bi-list"></i></span>
-    <div [style.margin-left.px]="contentWidth" class="collapse navbar-collapse" id="navbarMain">
+    <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav me-auto mb-2 mb-sm-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/recipes" routerLinkActive="active" >Recipes</a>
+          <a class="nav-link" routerLink="/recipes" routerLinkActive="active" >EW teams</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/auth" routerLinkActive="active" >Log in</a>
+          <a class="nav-link" routerLink="/auth" routerLinkActive="active" >Members</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/shopping-list" routerLinkActive="active" >Shopping List</a>
+          <a class="nav-link" routerLink="/shopping-list" routerLinkActive="active" >Log in</a>
         </li>
       </ul>
     </div>
@@ -27,30 +25,14 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/shopping-list" routerLinkActive="active" >Log out</a>
       </li>
-
-
     </ul>
 
   </div>
 </nav>
-
-<div id="sideBar" class="sidenav" [style.width.px]="barWidth">
-  <a href="javascript:void(0)" class="button btn-lg"  (click)="closeSideBar()">
-    <span class="navbar-toggler-icon">
-      <i class="bi bi-list"></i>
-    </span>
-  </a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
-</div>
-
-<div id="content" class="container col-md-12" [style.margin-left.px]="contentWidth">
+<div id="content" class="container col-md-12">
   <app-custom-error></app-custom-error>
   <router-outlet></router-outlet>
 </div>
-
 
 
 
