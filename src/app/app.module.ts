@@ -3,16 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from "@angular/forms";
+import { ComponentsModule } from "./components/components.module";
+import { CustomErrorComponent } from "./components/custom-error/custom-error.component";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { AppInterceptor } from "./interceptors/app.interceptor";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ComponentsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
