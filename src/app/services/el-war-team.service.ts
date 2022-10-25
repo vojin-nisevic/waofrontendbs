@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { ElWarTeam } from "../models/el-war-team";
 import { CustomError } from "../models/custom-error";
+import { ElWarTeamsDto } from "../models/dto/el-war-teams-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { CustomError } from "../models/custom-error";
 export class ElWarTeamService implements OnInit{
 
   private baseUrl?: string;
-  teams = new Subject<ElWarTeam[]>();
+  teams = new Subject<ElWarTeamsDto[]>();
   teamError = new Subject<CustomError>();
 
   constructor(private appService: AppService, private client: HttpClient) { }
@@ -30,7 +31,7 @@ export class ElWarTeamService implements OnInit{
   fetchTeams() {
     this.getBaseUrl();
     console.log('servis')
-    return this.client.get<ElWarTeam[]>(this.baseUrl!);
+    return this.client.get<ElWarTeamsDto[]>(this.baseUrl!);
   }
 
   fetchTeamById(id: number) {

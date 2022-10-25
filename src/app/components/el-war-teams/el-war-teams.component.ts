@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ElWarTeam } from "../../models/el-war-team";
 import { ElWarTeamService } from "../../services/el-war-team.service";
 import { AppService } from "../../global/app.service";
+import { ElWarTeamsDto } from "../../models/dto/el-war-teams-dto";
 
 @Component({
   selector: 'app-el-war-teams',
@@ -10,7 +11,7 @@ import { AppService } from "../../global/app.service";
 })
 export class ElWarTeamsComponent implements OnInit {
 
-  teams: ElWarTeam[] = [];
+  teams: ElWarTeamsDto[] = [];
   team: ElWarTeam | null = null;
   showDetails: boolean = false;
   // teamSubscription =  new Subscription();
@@ -29,6 +30,7 @@ export class ElWarTeamsComponent implements OnInit {
     this.elWarService.fetchTeams()
       .subscribe({
         next: value => {
+          console.log(value);
           this.teams = value;
         },
         error: err => {
