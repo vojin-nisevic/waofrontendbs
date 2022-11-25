@@ -34,10 +34,10 @@ export class ElWarTeamService implements OnInit{
     return this.client.get<ElWarTeamsDto[]>(this.baseUrl!);
   }
 
-  fetchTeamById(id: number) {
-    console.log("ID: " + id);
-    console.log(this.baseUrl! + "/find/")
+  fetchTeamById(id: any) {
     this.getBaseUrl();
+    // console.log("ID: " + id);
+    // console.log(this.baseUrl! + "/find/" + id)
     return this.client.get<ElWarTeam>(this.baseUrl! + "/find/" + id);
   }
 }

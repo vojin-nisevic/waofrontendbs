@@ -6,6 +6,7 @@ import { ElWarTeamDetailsComponent } from "./el-war-team-details/el-war-team-det
 import { ElWarTeamsComponent } from "./el-war-teams/el-war-teams.component";
 import { HeaderComponent } from "./header/header.component";
 import { PlayerDetailsComponent } from './player-details/player-details.component';
+import { PlayersComponent } from './players/players.component';
 
 
 
@@ -16,6 +17,7 @@ import { PlayerDetailsComponent } from './player-details/player-details.componen
     ElWarTeamsComponent,
     HeaderComponent,
     PlayerDetailsComponent,
+    PlayersComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { PlayerDetailsComponent } from './player-details/player-details.componen
     ElWarTeamsComponent,
     ElWarTeamDetailsComponent,
     PlayerDetailsComponent,
+    PlayersComponent,
   ]
 })
 export class ComponentsModule { }

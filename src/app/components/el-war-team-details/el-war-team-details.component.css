@@ -1,0 +1,15 @@
+.container {
+  margin-top: 4rem;
+  text-align: center;
+  align-content: space-evenly;
+}
+.alert {
+  align-content: center;
+}
+.table {
+  display: inline-table;
+}
+.table.th {
+  padding: 2px;
+  margin: 3rem;
+}

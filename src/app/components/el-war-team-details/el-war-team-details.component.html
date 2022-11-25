@@ -1,1 +1,79 @@
-<p>el-war-team-details works!</p>
+<div class="container col-12" *ngIf="team">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 alert alert-info">
+      {{team.name}} Team
+    </div>
+    <div class="col-md-2">
+      <button (click)="calculateStats()">Stat</button>
+    </div>
+  </div>
+  <div class="row-cols-12" style="align-content: space-evenly; display: inline-block" *ngIf="players">
+    <div class="table col-md-4 m-2">
+      <thead class="bg-info">
+      <th scope="col">Min HP</th>
+      <th scope="col">Max HP</th>
+      <th scope="col">Avg HP</th>
+      </thead>
+      <tbody class="bg-warning">
+      <td>{{minHP | number: '2.0'}}</td>
+      <td>{{maxHP | number: '2.0'}}</td>
+      <td>{{avgHP | number: '2.0'}}</td>
+      </tbody>
+    </div>
+    <div class="table col-md-4 m-2">
+      <thead class="bg-info">
+      <th scope="col">Min attack</th>
+      <th scope="col">Max attack</th>
+      <th scope="col">Avg attack</th>
+      </thead>
+      <tbody class="bg-warning">
+      <td>{{minAttack | number: '2.0'}}</td>
+      <td>{{maxAttack | number: '2.0'}}</td>
+      <td>{{avgAttack | number: '2.0'}}</td>
+      </tbody>
+    </div>
+    <div class="table col-md-4 m-2">
+      <thead class="bg-info">
+      <th scope="col">Min march</th>
+      <th scope="col">Max march</th>
+      <th scope="col">Avg march</th>
+      </thead>
+      <tbody class="bg-warning">
+      <td>{{minMarch | number: '2.0'}}</td>
+      <td>{{maxMarch | number: '2.0'}}</td>
+      <td>{{avgMarch | number: '2.0'}}</td>
+      </tbody>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="players">
+    <div class="col-12 table-responsive">
+      <div class="table">
+        <thead>
+        <th>Select</th>
+        <th>Current name</th>
+        <th>Castle</th>
+        <th>March</th>
+        <th>Attack</th>
+        <th>HP</th>
+        <th>Front row</th>
+        <th>Back row</th>
+        </thead>
+        <tbody *ngFor="let player of players">
+        <td><input type="checkbox" name="pl" [value]="player.id" (change)="onCheck($event)"></td>
+        <td>{{player.currentName}}</td>
+        <td>{{player.castleLevel}}</td>
+        <td>{{player.marchSize | number: '2.0'}}</td>
+        <td>{{player.attack}}</td>
+        <td>{{player.hp}}</td>
+        <td>{{player.frontRow.name}}</td>
+        <td>{{player.backRow.name}}</td>
+        </tbody>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!players">
+    <h3>NO PLAYERS IN THIS TEAM</h3>
+  </div>
+</div>

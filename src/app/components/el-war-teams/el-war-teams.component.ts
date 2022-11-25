@@ -3,6 +3,7 @@ import { ElWarTeam } from "../../models/el-war-team";
 import { ElWarTeamService } from "../../services/el-war-team.service";
 import { AppService } from "../../global/app.service";
 import { ElWarTeamsDto } from "../../models/dto/el-war-teams-dto";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-el-war-teams',
@@ -17,7 +18,7 @@ export class ElWarTeamsComponent implements OnInit {
   // teamSubscription =  new Subscription();
 
 
-  constructor(private elWarService: ElWarTeamService, private appService: AppService) {
+  constructor(private elWarService: ElWarTeamService, private appService: AppService, private router: Router) {
 
   }
 
@@ -79,6 +80,13 @@ export class ElWarTeamsComponent implements OnInit {
     // this.team = this.teams[id];
     // this.showDetails = true;
 
+  }
+
+  teamDetails(id: any){
+    console.log()
+    // let rt = this.router.navigate(['el-war-team-details/', {id: id}]);
+    this.router.navigateByUrl('/el-war-team-details/'+ id);
+    console.log();
   }
 
 }

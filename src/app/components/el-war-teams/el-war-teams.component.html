@@ -8,7 +8,7 @@
     </tr>
     </thead>
     <tbody *ngFor="let team of teams; let i = index">
-    <tr class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details">
+    <tr class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details" (click)="teamDetails(team.team.id)">
       <th class="col-md-1" scope="row">{{i + 1}}</th>
       <td class="col-md-3">{{team.team.name}}</td>
       <td class="col-md-3">{{team.players}}</td>

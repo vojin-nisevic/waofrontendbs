@@ -10,6 +10,7 @@ export class AppService {
 
   private baseUrl = 'http://localhost:8080';
   customError = new Subject<CustomError | null>();
+  playersPerPage: number = 10; // pagination number
 
   constructor() { }
 
@@ -17,7 +18,12 @@ export class AppService {
     return this.baseUrl;
   }
 
+  getPlayersPerPage() {
+    return this.playersPerPage;
+  }
+
   handleRequestError(err: any) {
+    console.log(err);
     try {
       this.customError.next(err);
     } catch (err) {
