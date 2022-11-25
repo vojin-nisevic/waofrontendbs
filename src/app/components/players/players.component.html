@@ -1,0 +1,29 @@
+<div class="container">
+  <div *ngIf="!players">
+    NO PLAYERS IN DATABASE
+  </div>
+  <div class="col-12 table-responsive" *ngIf="players">
+    <table class="table">
+      <thead class="bg-light">
+      <tr>
+        <th class="col-md-1" scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Og name</th>
+        <th scope="col">Castle</th>
+        <th scope="col">Front row</th>
+        <th scope="col">Back row</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let player of players; let i = index">
+      <tr class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details">
+        <th class="col-md-1" scope="row">{{i + 1}}</th>
+        <td>{{player.currentName}}</td>
+        <td>{{player.originalName}}</td>
+        <td>{{player.castleLevel}}</td>
+        <td>{{player.frontRow.name}}</td>
+        <td>{{player.backRow.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
