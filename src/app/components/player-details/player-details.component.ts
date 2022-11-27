@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PlayersService } from "../../services/players.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AppService } from "../../global/app.service";
 import { Player } from "../../models/player";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-player-details',
   templateUrl: './player-details.component.html',
   styleUrls: ['./player-details.component.css']
 })
-export class PlayerDetailsComponent implements OnInit {
+export class PlayerDetailsComponent implements OnInit, OnDestroy {
+
+  playerServiceSubscription: Subscription;
 
   isLoading: boolean;
   id: number = 0;
@@ -35,7 +38,8 @@ export class PlayerDetailsComponent implements OnInit {
   //   timeZone: 2
   // };
 
-  constructor(private playerService: PlayersService, private activeRoute: ActivatedRoute, private appService: AppService) {
+  constructor(private playerService: PlayersService, private activeRoute: ActivatedRoute, private appService: AppService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -60,6 +64,7 @@ export class PlayerDetailsComponent implements OnInit {
   }
 
   onDeleteClick() {
+    console.log('for delete');
     this.deletionWarning = true;
     this.message = 'Do you really want to delete this player?'
   }
@@ -79,24 +84,43 @@ export class PlayerDetailsComponent implements OnInit {
 
   onConfirmAction() {
     if (this.deletionWarning) {
-      this.deletionWarning = false;
       this.deleteUser();
       this.cancelDeletionWarning();
     }
     else {
-      this.editWarning = false;
       this.editUser();
       this.cancelEditWarning();
     }
   }
 
   deleteUser() {
-    this.message = null;
     console.log('deleting')
+    this.message = null;
+    this.playerService.deletePlayer(this.player.id).subscribe(
+      {
+        next: value => {
+          this.router.navigate(['/members']).then(r => {
+            this.appService.modalMessage.next('You have successfully deleted player ' + this.player.currentName);
+          });
+
+
+        },
+        error: err => {
+          this.appService.handleRequestError(err);
+        }
+      }
+    );
   }
 
   editUser() {
     this.message = null;
     console.log('editing')
+  }
+
+  ngOnDestroy(): void {
+    // this.playerServiceSubscription.unsubscribe();
+    if (this.playerServiceSubscription){
+      console.log('Subscription');
+    }
   }
 }

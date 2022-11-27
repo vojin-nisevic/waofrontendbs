@@ -7,6 +7,7 @@ import { ElWarTeamsComponent } from "./el-war-teams/el-war-teams.component";
 import { HeaderComponent } from "./header/header.component";
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { PlayersComponent } from './players/players.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 
@@ -18,17 +19,19 @@ import { PlayersComponent } from './players/players.component';
     HeaderComponent,
     PlayerDetailsComponent,
     PlayersComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
   ],
-  exports: [
-    CustomErrorComponent,
-    HeaderComponent,
-    ElWarTeamsComponent,
-    ElWarTeamDetailsComponent,
-    PlayerDetailsComponent,
-    PlayersComponent,
-  ]
+    exports: [
+        CustomErrorComponent,
+        HeaderComponent,
+        ElWarTeamsComponent,
+        ElWarTeamDetailsComponent,
+        PlayerDetailsComponent,
+        PlayersComponent,
+        ModalComponent,
+    ]
 })
 export class ComponentsModule { }

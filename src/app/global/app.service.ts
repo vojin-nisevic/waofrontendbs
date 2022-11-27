@@ -10,6 +10,7 @@ export class AppService {
 
   private baseUrl = 'http://localhost:8080';
   customError = new Subject<CustomError | null>();
+  modalMessage = new Subject<string | null>();
   playersPerPage: number = 10; // pagination number
 
   constructor() { }

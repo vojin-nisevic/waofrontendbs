@@ -51,4 +51,9 @@ export class PlayersService {
     this.getBaseUrl();
     return this.httpClient.get<PlayerElWarDto[]>(this.baseUrl + "/byteam/" + +id);
   }
+
+  deletePlayer(id: number){
+    this.getBaseUrl();
+    return this.httpClient.delete(this.baseUrl + "/delete/" + +id);
+  }
 }
