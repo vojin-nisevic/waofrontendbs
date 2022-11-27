@@ -15,7 +15,7 @@
       </tr>
       </thead>
       <tbody *ngFor="let player of players; let i = index">
-      <tr class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details">
+      <tr class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details" (click)="showDetails(player.id)">
         <th class="col-md-1" scope="row">{{i + 1}}</th>
         <td>{{player.currentName}}</td>
         <td>{{player.originalName}}</td>

@@ -1,0 +1,7 @@
+.container-fluid {
+  margin: 2rem;
+  /*display: flex;*/
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+}

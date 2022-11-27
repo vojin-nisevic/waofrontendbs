@@ -1,1 +1,80 @@
-<p>player-details works!</p>
+<div class="container-fluid">
+  <div *ngIf="player" class="col-12">
+    <dl class="row">
+      <dt class="col-sm-2">Og name</dt>
+      <dd class="col-sm-8">{{player.originalName}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Name</dt>
+      <dd class="col-sm-8">{{player.currentName}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Castle</dt>
+      <dd class="col-sm-8">{{player.castleLevel}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">March size</dt>
+      <dd class="col-sm-8">{{player.marchSize | number: '2.0'}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">HP</dt>
+      <dd class="col-sm-8">{{player.hp}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Attack</dt>
+      <dd class="col-sm-8">{{player.attack}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Kill count</dt>
+      <dd class="col-sm-8">{{player.killCount | number: '2.0'}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Front row</dt>
+      <dd class="col-sm-8">{{player.frontRow.name}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Back row</dt>
+      <dd class="col-sm-8">{{player.backRow.name}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Time zone</dt>
+      <dd class="col-sm-8">{{player.timeZone}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">EW team</dt>
+      <dd class="col-sm-8">{{player.ewTeam.name}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Alliance rank</dt>
+      <dd class="col-sm-8">{{player.allianceRank.name}}</dd>
+    </dl>
+    <dl class="row">
+      <dt class="col-sm-2">Merit rank</dt>
+      <dd class="col-sm-8">{{player.meritRank.name}}</dd>
+    </dl>
+    <!-- Button triggers modal -->
+    <div class="btn-group-sm">
+      <button type="button" class="btn btn-info m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="onEditClick()" >Edit</button>
+      <button type="button" class="btn btn-danger m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="onDeleteClick()" >Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="message">
+        {{message}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onConfirmAction()">Proceed</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

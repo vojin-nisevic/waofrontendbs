@@ -3,6 +3,7 @@ import { PlayersService } from "../../services/players.service";
 import { AppService } from "../../global/app.service";
 import { PlayerDto } from "../../models/dto/player-dto";
 import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-players',
@@ -16,7 +17,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
 
   playerServiceSubscription: Subscription;
 
-  constructor(private playersService: PlayersService, private appService: AppService) {
+  constructor(private playersService: PlayersService, private appService: AppService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -29,7 +30,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
    * initial fetch
    */
   fetchAllPlayers(page: number, limit: number) {
-    this.playerServiceSubscription = this.playersService.getPlayers(2, this.playersPerPage).subscribe(
+    this.playerServiceSubscription = this.playersService.getPlayers(page, this.playersPerPage).subscribe(
       {
         next: value => {
           console.log(value);
@@ -40,6 +41,10 @@ export class PlayersComponent implements OnInit, OnDestroy {
         }
       }
     )
+  }
+
+  showDetails(id: number){
+    this.router.navigate(['/members/details/' + id])
   }
 
   ngOnDestroy(): void {
