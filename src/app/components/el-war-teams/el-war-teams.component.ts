@@ -31,7 +31,7 @@ export class ElWarTeamsComponent implements OnInit {
     this.elWarService.fetchTeams()
       .subscribe({
         next: value => {
-          console.log(value);
+          // console.log(value);
           this.teams = value;
         },
         error: err => {

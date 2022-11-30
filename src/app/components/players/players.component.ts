@@ -21,7 +21,6 @@ export class PlayersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log("init");
     this.playersPerPage = this.appService.getPlayersPerPage();
     this.fetchAllPlayers(1, this.playersPerPage);
   }
@@ -33,7 +32,6 @@ export class PlayersComponent implements OnInit, OnDestroy {
     this.playerServiceSubscription = this.playersService.getPlayers(page, this.playersPerPage).subscribe(
       {
         next: value => {
-          console.log(value);
           this.players = value;
         },
         error: err => {

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CustomError } from "../models/custom-error";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { HttpStatusCode } from "@angular/common/http";
+import { ModalMessage } from "../models/modal-message";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class AppService {
 
   private baseUrl = 'http://localhost:8080';
   customError = new Subject<CustomError | null>();
-  modalMessage = new Subject<string | null>();
+  modalMessage = new Subject<ModalMessage | null>();
+  // modalMessage = new BehaviorSubject<string>(null);
   playersPerPage: number = 10; // pagination number
 
   constructor() { }

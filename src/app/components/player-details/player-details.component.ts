@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AppService } from "../../global/app.service";
 import { Player } from "../../models/player";
 import { Subscription } from "rxjs";
+import { ModalMessage } from "../../models/modal-message";
 
 @Component({
   selector: 'app-player-details',
@@ -12,7 +13,7 @@ import { Subscription } from "rxjs";
 })
 export class PlayerDetailsComponent implements OnInit, OnDestroy {
 
-  playerServiceSubscription: Subscription;
+  playerServiceSubscription = new Subscription();
 
   isLoading: boolean;
   id: number = 0;
@@ -20,6 +21,7 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   editWarning: boolean = false;
   player: Player | null = null;
   message: string = null;
+  modalMessage: ModalMessage;
   // player: Player | null
   //   = {
   //   originalName: "TulkasTheStrong",
@@ -49,7 +51,7 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
       }
     );
     this.isLoading = true;
-    console.log("player details init id: " + this.id);
+    // console.log("player details init id: " + this.id);
     this.playerService.getPlayerById(this.id)
       .subscribe({
         next: value => {
@@ -64,7 +66,7 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   }
 
   onDeleteClick() {
-    console.log('for delete');
+    // console.log('for delete');
     this.deletionWarning = true;
     this.message = 'Do you really want to delete this player?'
   }
@@ -94,14 +96,14 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   }
 
   deleteUser() {
-    console.log('deleting')
+    // console.log('deleting');
     this.message = null;
-    this.playerService.deletePlayer(this.player.id).subscribe(
+    this.playerServiceSubscription = this.playerService.deletePlayer(this.player.id).subscribe(
       {
         next: value => {
-          this.router.navigate(['/members']).then(r => {
-            this.appService.modalMessage.next('You have successfully deleted player ' + this.player.currentName);
-          });
+          this.modalMessage = {message:'You have successfully deleted player ' + this.player.currentName};
+          this.appService.modalMessage.next( this.modalMessage);
+          this.router.navigate(['/members']);
 
 
         },
@@ -118,9 +120,6 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.playerServiceSubscription.unsubscribe();
-    if (this.playerServiceSubscription){
-      console.log('Subscription');
-    }
+    this.playerServiceSubscription.unsubscribe();
   }
 }
