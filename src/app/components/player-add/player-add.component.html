@@ -1,0 +1,116 @@
+<div class="container-fluid">
+<div class="col-12">
+  <form  #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-8">
+        <!--OG NAME-->
+        <div class="form-group">
+          <label for="ogName" class="col-2">OG name</label>
+          <input #ogName="ngModel" type="text" id="ogName" class="form-control"  required minlength="2" maxlength="16"
+                  [(ngModel)]="model.originalName" name="ogName"
+          [ngClass]="{'is-invalid': (ogName.touched || ogName.dirty) && ogName.invalid,
+                  'is-valid': (ogName.touched || ogName.dirty) && ogName.valid}">
+          <span class="invalid-feedback">
+              <span *ngIf="ogName.hasError('required')">OG name is required</span>
+              <span *ngIf="ogName.hasError('minlength')">Minimum length is 2</span>
+              <span *ngIf="ogName.hasError('maxlength')">Maximum length is 16</span>
+          </span>
+        </div>
+        <!--CURRENT NAME-->
+        <div class="form-group">
+          <label for="currentName">Current name</label>
+          <input type="text" #currName="ngModel" id="currentName" class="form-control" required minlength="2" maxlength="16"
+          [(ngModel)]="model.currentName" name="currName"
+          [ngClass]="{'is-invalid': (currName.touched || currName.dirty) && currName.invalid,
+                    'is-valid': (currName.touched || currName.dirty) && currName.valid}">
+          <span class="invalid-feedback">
+              <span *ngIf="currName.hasError('required')">Current name is required</span>
+              <span *ngIf="currName.hasError('minlength')">Minimum length is 2</span>
+              <span *ngIf="currName.hasError('maxlength')">Maximum length is 16</span>
+          </span>
+        </div>
+        <!--MARCH SIZE-->
+        <div class="form-group">
+          <label for="marchSize">March size</label>
+          <input type="number" #marchSize="ngModel" id="marchSize" class="form-control" required min="0" maxlength="10"
+                 [(ngModel)]="model.marchSize | number: '0.0'"  name="marchSize"
+                 [ngClass]="{'is-invalid': (marchSize.touched || marchSize.dirty) && marchSize.invalid,
+                    'is-valid': (marchSize.touched || marchSize.dirty) && marchSize.valid}">
+          <span class="invalid-feedback">
+              <span *ngIf="marchSize.hasError('required')">This field is required</span>
+              <span *ngIf="currName.hasError('min')">March size must be greater than zero</span>
+          </span>
+        </div>
+        <!--TIME ZONE-->
+        <div class="form-group">
+          <label for="timeZone">Time zone</label>
+          <input type="number" #timeZone="ngModel" id="timeZone" class="form-control" required min="-12" max="12"
+                 [(ngModel)]="model.timeZone | number: '1.0'"  name="timeZone"
+                 [ngClass]="{'is-invalid': (timeZone.touched || timeZone.dirty) && timeZone.invalid,
+                    'is-valid': (timeZone.touched || timeZone.dirty) && timeZone.valid}">
+          <span class="invalid-feedback">
+              <span *ngIf="timeZone.hasError('required')">This field is required</span>
+              <span *ngIf="timeZone.hasError('min')">Minimum value for time zone is -12</span>
+              <span *ngIf="timeZone.hasError('max')">Maximum value for time zone is 12</span>
+          </span>
+        </div>
+        <!--CASTLE LEVEL-->
+        <div class="form-group">
+          <label for="castleLevel">Castle level</label>
+          <input type="number" #castleLevel="ngModel" id="castleLevel" class="form-control" required min="1" max="40"
+                 [ngModel]="model.castleLevel | number: '1.0'" (ngModelChange)="model.castleLevel=$event" name="castleLevel"
+                 [ngClass]="{'is-invalid': (castleLevel.touched || castleLevel.dirty) && castleLevel.invalid,
+                    'is-valid': (castleLevel.touched || castleLevel.dirty) && castleLevel.valid}">
+          <span class="invalid-feedback">
+              <span *ngIf="castleLevel.hasError('required')">This field is required</span>
+              <span *ngIf="castleLevel.hasError('min')">Castle level must be greater than zero</span>
+              <span *ngIf="castleLevel.hasError('max')">Castle level must not be greater than 40</span>
+          </span>
+        </div>
+        <!--KILL COUNT-->
+        <div class="form-group">
+          <label for="killCount">Kill count</label>
+          <input type="number" #killCount="ngModel" id="killCount" class="form-control" required min="10000"
+                 [(ngModel)]="model.killCount | number: '5.0'"  name="killCount"
+                 [ngClass]="{'is-invalid': (killCount.touched || killCount.dirty) && killCount.invalid,
+                    'is-valid': (killCount.touched || killCount.dirty) && killCount.valid}">
+          <span class="invalid-feedback">
+              <span *ngIf="killCount.hasError('required')">This field is required</span>
+              <span *ngIf="killCount.hasError('min')">Minimum value for kill count is 10000</span>
+          </span>
+        </div>
+        <!--HP-->
+        <div class="form-group">
+          <label for="HP">HP</label>
+          <input type="number" #HP="ngModel" id="HP" class="form-control" required min="10"
+                 [ngModel]="model.hp | number: '5.0'" (ngModelChange)="model.hp=$event" name="HP"
+                 [ngClass]="{'is-invalid': (HP.touched || HP.dirty) && HP.invalid,
+                    'is-valid': (HP.touched || HP.dirty) && HP.valid}">
+          <span class="invalid-feedback">
+              <span *ngIf="HP.hasError('required')">This field is required</span>
+              <span *ngIf="HP.hasError('min')">HP must be greater than 10</span>
+          </span>
+        </div>
+        <!--ATTACK-->
+        <div class="form-group">
+          <label for="HP">Back row attack</label>
+          <input type="number" #attack="ngModel" id="attack" class="form-control" required min="10"
+                 [(ngModel)]="model.attack | number: '2.0'"  name="attack"
+                 [ngClass]="{'is-invalid': (attack.touched || attack.dirty) && attack.invalid,
+                    'is-valid': (attack.touched || attack.dirty) && attack.valid}">
+          <span class="invalid-feedback">
+              <span *ngIf="attack.hasError('required')">This field is required</span>
+              <span *ngIf="attack.hasError('min')">attack must be greater than 10</span>
+          </span>
+        </div>
+        <!--FRONT ROW-->
+        <label for="frontRow">Front row</label>
+        <select name="frontRow" id="frontRow" #frontRow="ngModel" class="form-control" required
+        [(ngModel)]="frontRow" >
+          <option *ngFor="let f of fRow" [ngValue]="fRow">{{f}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
