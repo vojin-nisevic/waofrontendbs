@@ -30,7 +30,7 @@ export class ElWarTeamService implements OnInit{
   //fetch all teams
   fetchTeams() {
     this.getBaseUrl();
-    console.log('servis')
+    // console.log('servis')
     return this.client.get<ElWarTeamsDto[]>(this.baseUrl!);
   }
 
@@ -40,4 +40,5 @@ export class ElWarTeamService implements OnInit{
     // console.log(this.baseUrl! + "/find/" + id)
     return this.client.get<ElWarTeam>(this.baseUrl! + "/find/" + id);
   }
+
 }

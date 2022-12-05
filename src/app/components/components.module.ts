@@ -8,6 +8,9 @@ import { HeaderComponent } from "./header/header.component";
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { PlayersComponent } from './players/players.component';
 import { ModalComponent } from './modal/modal.component';
+import { PlayerAddComponent } from './player-add/player-add.component';
+import { RouterLinkWithHref } from "@angular/router";
+import { FormsModule, NgModel, ReactiveFormsModule } from "@angular/forms";
 
 
 
@@ -20,9 +23,13 @@ import { ModalComponent } from './modal/modal.component';
     PlayerDetailsComponent,
     PlayersComponent,
     ModalComponent,
+    PlayerAddComponent,
   ],
   imports: [
     CommonModule,
+    RouterLinkWithHref,
+    FormsModule,
+    ReactiveFormsModule,
   ],
     exports: [
         CustomErrorComponent,

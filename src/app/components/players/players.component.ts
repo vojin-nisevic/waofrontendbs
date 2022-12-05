@@ -23,6 +23,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.playersPerPage = this.appService.getPlayersPerPage();
     this.fetchAllPlayers(1, this.playersPerPage);
+    this.appService.getCodeBooks();
   }
 
   /**
