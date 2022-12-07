@@ -52,7 +52,10 @@ export class PlayerAddComponent implements OnInit {
 
   updateMarchSize(size: string){
     console.log(size);
-    this.model.marchSize = +size;
+    // let vv = size.toString().split(',').join('');
+    let vv = size.toString().replace(/[^0-9]/g, '');
+    console.log('vv: ' + vv);
+    this.model.marchSize = +vv;
     console.log('model: ' + this.model.marchSize);
   }
 

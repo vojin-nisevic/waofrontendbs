@@ -32,8 +32,8 @@
         <!--MARCH SIZE-->
         <div class="form-group">
           <label for="marchSize">March size</label>
-          <input type="number" #marchSize="ngModel" id="marchSize" class="form-control" required min="0" maxlength="10"
-                 [(ngModel)]="model.marchSize | number: '0.0'"  name="marchSize"
+          <input type="text" #marchSize="ngModel" id="marchSize" class="form-control" required min="0" autocomplete="off" pattern="[^0-9]{2,}"
+                 [ngModel]="model.marchSize | number: '0.0'" (ngModelChange)="updateMarchSize($event)" name="marchSize"
                  [ngClass]="{'is-invalid': (marchSize.touched || marchSize.dirty) && marchSize.invalid,
                     'is-valid': (marchSize.touched || marchSize.dirty) && marchSize.valid}">
           <span class="invalid-feedback">
@@ -45,7 +45,7 @@
         <div class="form-group">
           <label for="timeZone">Time zone</label>
           <input type="number" #timeZone="ngModel" id="timeZone" class="form-control" required min="-12" max="12"
-                 [(ngModel)]="model.timeZone | number: '1.0'"  name="timeZone"
+                 [ngModel]="model.timeZone | number: '1.0'" (ngModelChange)="model.timeZone=$event" name="timeZone"
                  [ngClass]="{'is-invalid': (timeZone.touched || timeZone.dirty) && timeZone.invalid,
                     'is-valid': (timeZone.touched || timeZone.dirty) && timeZone.valid}">
           <span class="invalid-feedback">
@@ -71,7 +71,7 @@
         <div class="form-group">
           <label for="killCount">Kill count</label>
           <input type="number" #killCount="ngModel" id="killCount" class="form-control" required min="10000"
-                 [(ngModel)]="model.killCount | number: '5.0'"  name="killCount"
+                 [ngModel]="model.killCount | number: '5.0'" (ngModelChange)="model.killCount=$event" name="killCount"
                  [ngClass]="{'is-invalid': (killCount.touched || killCount.dirty) && killCount.invalid,
                     'is-valid': (killCount.touched || killCount.dirty) && killCount.valid}">
           <span class="invalid-feedback">
@@ -95,7 +95,7 @@
         <div class="form-group">
           <label for="HP">Back row attack</label>
           <input type="number" #attack="ngModel" id="attack" class="form-control" required min="10"
-                 [(ngModel)]="model.attack | number: '2.0'"  name="attack"
+                 [ngModel]="model.attack | number: '2.0'" (ngModelChange)="model.attack=$event" name="attack"
                  [ngClass]="{'is-invalid': (attack.touched || attack.dirty) && attack.invalid,
                     'is-valid': (attack.touched || attack.dirty) && attack.valid}">
           <span class="invalid-feedback">
@@ -106,8 +106,8 @@
         <!--FRONT ROW-->
         <label for="frontRow">Front row</label>
         <select name="frontRow" id="frontRow" #frontRow="ngModel" class="form-control" required
-        [(ngModel)]="frontRow" >
-          <option *ngFor="let f of fRow" [ngValue]="fRow">{{f}}</option>
+        [ngModel]="frontRow" (ngModelChange)="model.frontRow=$event">
+          <option *ngFor="let f of fRow" [value]="f">{{f.name}}</option>
         </select>
       </div>
     </div>
