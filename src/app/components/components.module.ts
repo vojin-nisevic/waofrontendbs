@@ -10,7 +10,9 @@ import { PlayersComponent } from './players/players.component';
 import { ModalComponent } from './modal/modal.component';
 import { PlayerAddComponent } from './player-add/player-add.component';
 import { RouterLinkWithHref } from "@angular/router";
-import { FormsModule, NgModel, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
+import { TextToIntegerValidateDirective } from '../directives/text-to-integer-validate.directive';
+import { ValidateSelectDirective } from '../directives/validate-select.directive';
 
 
 
@@ -24,12 +26,13 @@ import { FormsModule, NgModel, ReactiveFormsModule } from "@angular/forms";
     PlayersComponent,
     ModalComponent,
     PlayerAddComponent,
+    TextToIntegerValidateDirective,
+    ValidateSelectDirective,
   ],
   imports: [
     CommonModule,
     RouterLinkWithHref,
     FormsModule,
-    ReactiveFormsModule,
   ],
     exports: [
         CustomErrorComponent,
