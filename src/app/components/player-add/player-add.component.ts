@@ -3,6 +3,9 @@ import { Player } from "../../models/player";
 import { FrontRow } from "../../models/front-row";
 import { NgForm } from "@angular/forms";
 import { BackRow } from "../../models/back-row";
+import { AllianceRank } from "../../models/alliance-rank";
+import { MeritRank } from "../../models/merit-rank";
+import { ElWarTeam } from "../../models/el-war-team";
 
 @Component({
   selector: 'app-player-add',
@@ -13,7 +16,9 @@ export class PlayerAddComponent implements OnInit {
 
   fRow: FrontRow[];
   bRow: BackRow[];
-  defaultFRow: any;
+  allRank: AllianceRank[];
+  merRank: MeritRank[];
+  elWarTeam: ElWarTeam[];
   model: Player = {
     id: null,
     originalName: '',
@@ -53,7 +58,9 @@ export class PlayerAddComponent implements OnInit {
   ngOnInit(): void {
     this.fRow = JSON.parse(localStorage.getItem('frontRow'));
     this.bRow = JSON.parse(localStorage.getItem('backRow'));
-    this.defaultFRow = this.fRow[0];
+    this.allRank = JSON.parse(localStorage.getItem('allianceRank'));
+    this.merRank = JSON.parse(localStorage.getItem('meritRank'));
+    this.elWarTeam = JSON.parse(localStorage.getItem('elWarTeam'));
     // console.log(this.fRow);
   }
 
@@ -80,9 +87,6 @@ export class PlayerAddComponent implements OnInit {
   }
 
   backRowUpdate(value: any) {
-    // let result = this.bRow.find(p => p.id === +value);
-    // console.log(result.name);
-    // console.log(this.bRow.find(br => br.id === +value).name);
     console.log(value);
   }
 

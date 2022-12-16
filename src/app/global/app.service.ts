@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CustomError } from "../models/custom-error";
-import { BehaviorSubject, Subject } from "rxjs";
+import { BehaviorSubject, map, Subject } from "rxjs";
 import { HttpClient, HttpStatusCode } from "@angular/common/http";
 import { ModalMessage } from "../models/modal-message";
 import { FrontRow } from "../models/front-row";
@@ -8,6 +8,8 @@ import { BackRow } from "../models/back-row";
 import { AllianceRank } from "../models/alliance-rank";
 import { MeritRank } from "../models/merit-rank";
 import { ElWarTeam } from "../models/el-war-team";
+import { ElWarTeamsDto } from "../models/dto/el-war-teams-dto";
+import { CodeBook } from "../models/code-book";
 
 @Injectable({
   providedIn: 'root'
@@ -48,43 +50,18 @@ export class AppService {
     }
   }
 
-  //reads codebooks and stores them into local storage
   getCodeBooks(){
-    let getUrl = this.baseUrl + '/ewteam';
-    //FRONT ROW
-    this.client.get<FrontRow[]>(getUrl + '/front-row').subscribe({
+    let getUrl = this.baseUrl + '/ewteam' + '/code-books';
+    this.client.get<CodeBook[]>(getUrl)
+      .subscribe({
       next: value => {
-        localStorage.setItem('frontRow', JSON.stringify(value));
+        for (const valueKey in value) {
+          localStorage.setItem(valueKey, JSON.stringify(value[valueKey]));
+        }
       },
-      error: err => this.handleRequestError(err)
-    });
-    //BACK ROW
-    this.client.get<BackRow[]>(getUrl + '/back-row').subscribe({
-      next: value => {
-        localStorage.setItem('backRow', JSON.stringify(value));
-      },
-      error: err => this.handleRequestError(err)
-    });
-    //ALLIANCE RANK
-    this.client.get<AllianceRank[]>(getUrl + '/alliance-rank').subscribe({
-      next: value => {
-        localStorage.setItem('allianceRank', JSON.stringify(value));
-      },
-      error: err => this.handleRequestError(err)
-    });
-    //MERIT RANK
-    this.client.get<MeritRank[]>(getUrl + '/merit-rank').subscribe({
-      next: value => {
-        localStorage.setItem('meritRank', JSON.stringify(value));
-      },
-      error: err => this.handleRequestError(err)
-    });
-    //EW TEAM
-    this.client.get<ElWarTeam[]>(getUrl).subscribe({
-      next: value => {
-        localStorage.setItem('elWarTeam', JSON.stringify(value));
-      },
-      error: err => this.handleRequestError(err)
+      error: err => {
+        this.handleRequestError(err);
+      }
     });
   }
 }

@@ -130,11 +130,44 @@
             <span *ngIf="backRow.hasError('unselected')">You must select back row</span>
           </span>
         </div>
+        <div class="form-group">
+          <label for="allyRank">Alliance rank</label>
+          <select name="allyRank" id="allyRank" #allyRank="ngModel" class="form-select"
+                  [ngModel]="allyRank"  appValidateSelect>
+            <option [value]="-1" selected>Select alliance rank</option>
+            <option *ngFor="let ar of allRank; let i = index" [value]="ar.id">{{ar.name}}</option>
+          </select>
+          <span class="text-danger">
+            <span *ngIf="allyRank.hasError('unselected')">You must alliance rank</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="meritRank">Merit rank</label>
+          <select name="meritRank" id="meritRank" #meritRank="ngModel" class="form-select"
+                  [ngModel]="meritRank"  appValidateSelect>
+            <option [value]="-1" selected>Select merit rank</option>
+            <option *ngFor="let mr of merRank; let i = index" [value]="mr.id">{{mr.name}}</option>
+          </select>
+          <span class="text-danger">
+            <span *ngIf="meritRank.hasError('unselected')">You must select merit rank</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="EWTeam">EW team</label>
+          <select name="EWTeam" id="EWTeam" #EWTeam="ngModel" class="form-select"
+                  [ngModel]="EWTeam"  appValidateSelect>
+            <option [value]="-1" selected>Select EW team</option>
+            <option *ngFor="let et of elWarTeam; let i = index" [value]="et.id">{{et.name}}</option>
+          </select>
+          <span class="text-danger">
+            <span *ngIf="EWTeam.hasError('unselected')">You must select EW team</span>
+          </span>
+        </div>
       </div>
     </div>
     <br>
     <br>
-    <button [disabled]="f.valid">Save</button>
+    <button [disabled]="f.invalid">Save</button>
   </form>
 </div>
 </div>
