@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Player } from "../models/player";
 import { AppService } from "../global/app.service";
 import { HttpClient } from "@angular/common/http";
@@ -8,13 +8,17 @@ import { PlayerDto } from "../models/dto/player-dto";
 @Injectable({
   providedIn: 'root'
 })
-export class PlayersService {
+export class PlayersService implements OnInit{
 
   player: Player | null = null;
   private baseUrl?: string;
   private limit: number;
 
   constructor(private appService: AppService, private httpClient: HttpClient) {
+  }
+
+  ngOnInit(): void {
+    this.getBaseUrl();
   }
 
   private getBaseUrl() {
@@ -56,4 +60,11 @@ export class PlayersService {
     this.getBaseUrl();
     return this.httpClient.delete(this.baseUrl + "/delete/" + +id);
   }
+
+  addPlayer(data: Player) {
+    // this.getBaseUrl();
+    return  this.httpClient.post<Player>(this.baseUrl + '/add', data);
+  }
+
+
 }

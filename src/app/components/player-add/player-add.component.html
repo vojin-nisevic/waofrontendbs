@@ -1,4 +1,5 @@
 <div class="container-fluid">
+
 <div class="col-12">
   <form  #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="row">
@@ -109,7 +110,7 @@
         <div class="form-group">
           <label for="frontRow">Front row</label>
           <select name="frontRow" id="frontRow" #frontRow="ngModel" class="form-select"
-                  [ngModel]="frontRow" (ngModelChange)="frontRowUpdate($event)" appValidateSelect>
+                  [ngModel]="frontRow" appValidateSelect>
             <option [value]="-1"  selected >Select front row</option>
             <option *ngFor="let fr of fRow; let i = index"
                     [value]="fr.id" >{{fr.name}}</option>
@@ -122,7 +123,7 @@
         <div class="form-group">
           <label for="backRow">Back row</label>
           <select name="backRow" id="backRow" #backRow="ngModel" class="form-select"
-                  [ngModel]="backRow" (ngModelChange)="backRowUpdate($event)" appValidateSelect>
+                  [ngModel]="backRow" appValidateSelect>
             <option [value]="-1" selected>Select back row</option>
             <option *ngFor="let br of bRow; let i = index" [value]="br.id">{{br.name}}</option>
           </select>
@@ -167,7 +168,8 @@
     </div>
     <br>
     <br>
-    <button [disabled]="f.invalid">Save</button>
+    <button [disabled]="f.invalid || frontRow.value === -1 || backRow.value === -1 || allyRank.value === -1
+                        || meritRank.value === -1 || EWTeam.value === -1">Save</button>
   </form>
 </div>
 </div>

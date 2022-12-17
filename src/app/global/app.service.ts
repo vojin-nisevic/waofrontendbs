@@ -26,7 +26,8 @@ export class AppService {
   // meritRank = new Subject<MeritRank[]>();
   playersPerPage: number = 10; // pagination number
 
-  constructor(private client: HttpClient) { }
+  constructor(private client: HttpClient) {
+  }
 
   getBaseUrl(): String {
     return this.baseUrl;
@@ -50,18 +51,35 @@ export class AppService {
     }
   }
 
-  getCodeBooks(){
+  getCodeBooks() {
     let getUrl = this.baseUrl + '/ewteam' + '/code-books';
     this.client.get<CodeBook[]>(getUrl)
       .subscribe({
-      next: value => {
-        for (const valueKey in value) {
-          localStorage.setItem(valueKey, JSON.stringify(value[valueKey]));
+        next: value => {
+          for (const valueKey in value) {
+            localStorage.setItem(valueKey, JSON.stringify(value[valueKey]));
+          }
+        },
+        error: err => {
+          this.handleRequestError(err);
         }
-      },
-      error: err => {
-        this.handleRequestError(err);
+      });
+  }
+
+  /**
+   * checking codebooks in local storage, if single one is not loaded, it loads all of them
+   */
+  checkCodeBooks(): boolean {
+    try {
+      if (!!localStorage.getItem('frontRow') || !!localStorage.getItem('backRow') || !!localStorage.getItem('allianceRank')
+              || !!localStorage.getItem('meritRank') || !!localStorage.getItem('elWarTeam')) {
+        this.getCodeBooks();
       }
-    });
+      return true;
+    }
+    catch (e) {
+      this.handleRequestError(e);
+      return false;
+    }
   }
 }
