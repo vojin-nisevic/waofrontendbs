@@ -72,7 +72,8 @@ export class AppService {
   checkCodeBooks(): boolean {
     try {
       if (!!localStorage.getItem('frontRow') || !!localStorage.getItem('backRow') || !!localStorage.getItem('allianceRank')
-              || !!localStorage.getItem('meritRank') || !!localStorage.getItem('elWarTeam')) {
+              || !!localStorage.getItem('meritRank') || !!localStorage.getItem('elWarTeam')
+        || !!localStorage.getItem('numberOfPlayers')) {
         this.getCodeBooks();
       }
       return true;

@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'members', component: PlayersComponent},
   {path: 'members/details/:id', component: PlayerDetailsComponent},
   {path: 'members/add', component: PlayerAddComponent},
+  {path: 'members/edit/:id', component: PlayerAddComponent},
 ];
 
 @NgModule({

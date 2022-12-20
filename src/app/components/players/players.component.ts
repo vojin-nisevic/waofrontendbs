@@ -33,6 +33,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
     this.playerServiceSubscription = this.playersService.getPlayers(page, this.playersPerPage).subscribe(
       {
         next: value => {
+          console.log('Players: ', value);
           this.players = value;
         },
         error: err => {

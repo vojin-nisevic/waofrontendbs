@@ -110,8 +110,8 @@
         <div class="form-group">
           <label for="frontRow">Front row</label>
           <select name="frontRow" id="frontRow" #frontRow="ngModel" class="form-select"
-                  [ngModel]="frontRow" appValidateSelect>
-            <option [value]="-1"  selected >Select front row</option>
+                  [ngModel]="frontRow" appValidateSelect [value]="!!model.frontRow.id? model.frontRow.id : -1">
+            <option [value]="-1"  selected>Select front row</option>
             <option *ngFor="let fr of fRow; let i = index"
                     [value]="fr.id" >{{fr.name}}</option>
 
@@ -123,7 +123,7 @@
         <div class="form-group">
           <label for="backRow">Back row</label>
           <select name="backRow" id="backRow" #backRow="ngModel" class="form-select"
-                  [ngModel]="backRow" appValidateSelect>
+                  [ngModel]="backRow" appValidateSelect [value]="!!model.backRow.id? model.backRow.id : -1">
             <option [value]="-1" selected>Select back row</option>
             <option *ngFor="let br of bRow; let i = index" [value]="br.id">{{br.name}}</option>
           </select>
@@ -134,7 +134,7 @@
         <div class="form-group">
           <label for="allyRank">Alliance rank</label>
           <select name="allyRank" id="allyRank" #allyRank="ngModel" class="form-select"
-                  [ngModel]="allyRank"  appValidateSelect>
+                  [ngModel]="allyRank"  appValidateSelect [value]="!!model.allianceRank.id? model.allianceRank.id : -1">
             <option [value]="-1" selected>Select alliance rank</option>
             <option *ngFor="let ar of allRank; let i = index" [value]="ar.id">{{ar.name}}</option>
           </select>
@@ -145,7 +145,7 @@
         <div class="form-group">
           <label for="meritRank">Merit rank</label>
           <select name="meritRank" id="meritRank" #meritRank="ngModel" class="form-select"
-                  [ngModel]="meritRank"  appValidateSelect>
+                  [ngModel]="meritRank"  appValidateSelect [value]="!!model.meritRank.id? model.meritRank.id : -1">
             <option [value]="-1" selected>Select merit rank</option>
             <option *ngFor="let mr of merRank; let i = index" [value]="mr.id">{{mr.name}}</option>
           </select>
@@ -156,7 +156,7 @@
         <div class="form-group">
           <label for="EWTeam">EW team</label>
           <select name="EWTeam" id="EWTeam" #EWTeam="ngModel" class="form-select"
-                  [ngModel]="EWTeam"  appValidateSelect>
+                  [ngModel]="EWTeam"  appValidateSelect [value]="!!model.ewTeam.id? model.ewTeam.id : -1">
             <option [value]="-1" selected>Select EW team</option>
             <option *ngFor="let et of elWarTeam; let i = index" [value]="et.id">{{et.name}}</option>
           </select>
@@ -168,7 +168,7 @@
     </div>
     <br>
     <br>
-    <button [disabled]="f.invalid || frontRow.value === -1 || backRow.value === -1 || allyRank.value === -1
+    <button [disabled]="editMode? f.invalid || !f.dirty: f.invalid || frontRow.value === -1 || backRow.value === -1 || allyRank.value === -1
                         || meritRank.value === -1 || EWTeam.value === -1">Save</button>
   </form>
 </div>

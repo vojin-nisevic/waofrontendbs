@@ -116,6 +116,7 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
 
   editUser() {
     this.message = null;
+    this.router.navigate(['/members/edit/' + this.player.id]);
     console.log('editing')
   }
 

@@ -66,5 +66,8 @@ export class PlayersService implements OnInit{
     return  this.httpClient.post<Player>(this.baseUrl + '/add', data);
   }
 
+  editPlayer(data: Player, id: number) {
+    return this.httpClient.put<Player>(this.baseUrl + '/edit/' + +id, data);
+  }
 
 }
