@@ -16,7 +16,7 @@
       </thead>
       <tbody *ngFor="let player of players; let i = index">
       <tr class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details" (click)="showDetails(player.id)">
-        <th class="col-md-1" scope="row">{{i + 1}}</th>
+        <th class="col-md-1" scope="row">{{i + 1 + (currentPage - 1) * playersPerPage}}</th>
         <td>{{player.currentName}}</td>
         <td>{{player.originalName}}</td>
         <td>{{player.castleLevel}}</td>
@@ -29,21 +29,21 @@
   <!-- PAGINATION -->
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+        <a class="page-link" href="#" tabindex="-1" (click)="fetchNextPage(currentPage - 1, $event)">Previous</a>
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+      <li class="page-item" *ngFor="let page of pages; let i = index" [ngClass]="{'disabled': !((playersPerPage * page - numberOfPlayers) < 10)}">
+        <a class="page-link" type="button" [ngClass]="{'active-page': page == currentPage,
+        'disabled': !((playersPerPage * page - numberOfPlayers) < 10)}" (click)="fetchNextPage(page, $event)">{{page}}</a>
+      </li>
+      <li class="page-item" [ngClass]="{'disabled': ( currentPage * playersPerPage) - numberOfPlayers > 0}">
+        <a class="page-link" href="#" (click)="fetchNextPage(currentPage + 1, $event)">Next</a>
       </li>
     </ul>
   </nav>
+  <!-- PAGINATION -->
   <hr>
   <div class="col-12" style="align-items: center">
     <a class="btn btn-info btn-sm" type="button" [routerLink]="['/members/add']">Add player</a>
   </div>
-
-
 </div>

@@ -1,3 +1,16 @@
 table tbody tr {
   cursor: pointer;
 }
+
+.active-page {
+  background-color: lightgray;
+}
+
+li a {
+  cursor: pointer;
+}
+
+li a.disabled {
+  color: black;
+  cursor: auto;
+}
