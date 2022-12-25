@@ -19,12 +19,7 @@ export class AppService {
   private baseUrl = 'http://localhost:8080';
   customError = new Subject<CustomError | null>();
   modalMessage = new Subject<ModalMessage | null>();
-  // modalMessage = new BehaviorSubject<string>(null);
-  // frontRow = new Subject<FrontRow[]>();
-  // backRow = new Subject<BackRow[]>();
-  // allianceRank = new Subject<AllianceRank[]>();
-  // meritRank = new Subject<MeritRank[]>();
-  playersPerPage: number = 10; // pagination number
+  pagination: number = 10; // pagination number
 
   constructor(private client: HttpClient) {
   }
@@ -34,7 +29,7 @@ export class AppService {
   }
 
   getPlayersPerPage() {
-    return this.playersPerPage;
+    return this.pagination;
   }
 
   handleRequestError(err: any) {

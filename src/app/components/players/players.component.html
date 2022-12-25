@@ -1,49 +1,70 @@
 <div class="container">
-  <div *ngIf="!players">
-    NO PLAYERS IN DATABASE
+  <div *ngIf="!players && !search">
+    NO PLAYERS IN DATABASE!
   </div>
-  <div class="col-12 table-responsive" *ngIf="players">
-    <table class="table">
-      <thead class="bg-light">
-      <tr>
-        <th class="col-md-1" scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Og name</th>
-        <th scope="col">Castle</th>
-        <th scope="col">Front row</th>
-        <th scope="col">Back row</th>
-      </tr>
-      </thead>
-      <tbody *ngFor="let player of players; let i = index">
-      <tr class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details" (click)="showDetails(player.id)">
-        <th class="col-md-1" scope="row">{{i + 1 + (currentPage - 1) * playersPerPage}}</th>
-        <td>{{player.currentName}}</td>
-        <td>{{player.originalName}}</td>
-        <td>{{player.castleLevel}}</td>
-        <td>{{player.frontRow.name}}</td>
-        <td>{{player.backRow.name}}</td>
-      </tr>
-      </tbody>
-    </table>
+  <div *ngIf="!players && search">
+    NO RESULTS FOR YOUR SEARCH!
   </div>
-  <!-- PAGINATION -->
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
-        <a class="page-link" href="#" tabindex="-1" (click)="fetchNextPage(currentPage - 1, $event)">Previous</a>
-      </li>
-      <li class="page-item" *ngFor="let page of pages; let i = index" [ngClass]="{'disabled': !((playersPerPage * page - numberOfPlayers) < 10)}">
-        <a class="page-link" type="button" [ngClass]="{'active-page': page == currentPage,
-        'disabled': !((playersPerPage * page - numberOfPlayers) < 10)}" (click)="fetchNextPage(page, $event)">{{page}}</a>
-      </li>
-      <li class="page-item" [ngClass]="{'disabled': ( currentPage * playersPerPage) - numberOfPlayers > 0}">
-        <a class="page-link" href="#" (click)="fetchNextPage(currentPage + 1, $event)">Next</a>
+  <div class="row">
+    <ul>
+      <li class="nav-item">
+        <input #search type="text" placeholder="Search" (keyup)="onSearch($event.target)">
       </li>
     </ul>
-  </nav>
-  <!-- PAGINATION -->
-  <hr>
-  <div class="col-12" style="align-items: center">
-    <a class="btn btn-info btn-sm" type="button" [routerLink]="['/members/add']">Add player</a>
+  </div>
+  <div class="col-12" *ngIf="players">
+
+    <div>
+      <table class="table">
+        <thead class="bg-light">
+        <tr>
+          <th class="col-md-1" scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Og name</th>
+          <th scope="col">Castle</th>
+          <th scope="col">Front row</th>
+          <th scope="col">Back row</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let player of players; let i = index">
+        <tr class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details" (click)="showDetails(player.id)">
+          <th class="col-md-1" scope="row">{{i + 1 + (currentPage - 1) * playersPerPage}}</th>
+          <td>{{player.currentName}}</td>
+          <td>{{player.originalName}}</td>
+          <td>{{player.castleLevel}}</td>
+          <td>{{player.frontRow.name}}</td>
+          <td>{{player.backRow.name}}</td>
+        </tr>
+        <tr *ngFor="let dummy of dummyPlayers" class="bg-info" data-toggle="tooltip" data-placement="top" title="Click for details" (click)="showDetails(player.id)">
+          <th class="col-md-1" scope="row">#</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- PAGINATION -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [ngClass]="{'disabled': currentPage === 1}">
+          <a class="btn page-link" type="button" (click)="fetchNextPage(currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" *ngFor="let page of pages; let i = index" [ngClass]="{'disabled': !((playersPerPage * page - numberOfPlayers) < 10)}">
+          <a class="btn page-link" type="button" [ngClass]="{'active-page': page == currentPage,
+        'disabled': !((playersPerPage * page - numberOfPlayers) < 10)}" (click)="fetchNextPage(page)">{{page}}</a>
+        </li>
+        <li class="page-item" [ngClass]="{'disabled': ( currentPage * playersPerPage) - numberOfPlayers > 0}">
+          <a class="btn page-link" type="button" (click)="fetchNextPage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- PAGINATION -->
+    <hr>
+    <div class="col-12" style="align-items: center">
+      <a class="btn btn-info btn-sm" type="button" [routerLink]="['/members/add']">Add player</a>
+    </div>
   </div>
 </div>

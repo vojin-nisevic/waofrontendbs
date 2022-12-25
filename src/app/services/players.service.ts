@@ -4,6 +4,7 @@ import { AppService } from "../global/app.service";
 import { HttpClient } from "@angular/common/http";
 import { PlayerElWarDto } from "../models/dto/player-el-war-dto";
 import { PlayerDto } from "../models/dto/player-dto";
+import { CodeBook } from "../models/code-book";
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,12 @@ export class PlayersService implements OnInit{
   private limit: number;
 
   constructor(private appService: AppService, private httpClient: HttpClient) {
+    this.getBaseUrl();
   }
 
   ngOnInit(): void {
-    this.getBaseUrl();
+    console.log('SERVICE ON INIT')
+    // this.getBaseUrl();
   }
 
   private getBaseUrl() {
@@ -31,11 +34,12 @@ export class PlayersService implements OnInit{
    * fetch all players
    */
   getPlayers(page: number, limit: number) {
-    this.getBaseUrl();
-    return this.httpClient.get<PlayerDto[]>(this.baseUrl, {params: {
+    return this.httpClient.get<PlayerDto[]>(this.baseUrl, {
+      params: {
         page: page,
         limit: limit
-      }});
+      }
+    });
   }
 
   /**
@@ -43,7 +47,6 @@ export class PlayersService implements OnInit{
    * @param id
    */
   getPlayerById(id: number) {
-    this.getBaseUrl();
     return this.httpClient.get<Player>(this.baseUrl + "/" + +id);
   }
 
@@ -52,22 +55,33 @@ export class PlayersService implements OnInit{
    * @param id: id of eliter war team
    */
   getPlayersByTeam(id: number) {
-    this.getBaseUrl();
     return this.httpClient.get<PlayerElWarDto[]>(this.baseUrl + "/byteam/" + +id);
   }
 
-  deletePlayer(id: number){
-    this.getBaseUrl();
+  deletePlayer(id: number) {
     return this.httpClient.delete(this.baseUrl + "/delete/" + +id);
   }
 
   addPlayer(data: Player) {
-    // this.getBaseUrl();
-    return  this.httpClient.post<Player>(this.baseUrl + '/add', data);
+    return this.httpClient.post<Player>(this.baseUrl + '/add', data);
   }
 
   editPlayer(data: Player, id: number) {
     return this.httpClient.put<Player>(this.baseUrl + '/edit/' + +id, data);
+  }
+
+  searchPlayers(page: number, limit: number, search: string) {
+    let test = search === '' ? 'empty' : 'something else';
+    //I am using CodeBook here because it is adjusted to receive HashMap
+    return this.httpClient.get<CodeBook>(this.baseUrl, {
+      params:
+        {
+          'page': page,
+          'limit': limit,
+          'search': search
+        }
+    });
+
   }
 
 }

@@ -14,3 +14,9 @@ li a.disabled {
   color: black;
   cursor: auto;
 }
+
+ul li {
+  list-style-type: none;
+  color: blue;
+}
+
