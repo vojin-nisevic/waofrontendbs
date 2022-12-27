@@ -52,11 +52,23 @@ export class PlayersService implements OnInit{
 
   /**
    * returns list of players that belongs to team with id parameter
-   * @param id: id of eliter war team
+   * @param id: id of elite war team
+   * @param inTeam: boolean indicates whether to search players in or out of the team. true for in team
+   * @param page: page number for pagination
+   * @param limit: limit of players per page
    */
-  getPlayersByTeam(id: number) {
-    return this.httpClient.get<PlayerElWarDto[]>(this.baseUrl + "/byteam/" + +id);
+  getPlayersByTeam(id: number, inTeam: boolean, page: number, limit: number) {
+    // Codebook is adjusted for Hashmap from backend
+    return this.httpClient.get<CodeBook[]>(this.baseUrl + "/byteam/" + +id, {
+      params: {
+        'in': inTeam,
+        'page': page,
+        'limit': limit
+      }
+    });
   }
+
+
 
   deletePlayer(id: number) {
     return this.httpClient.delete(this.baseUrl + "/delete/" + +id);

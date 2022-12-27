@@ -17,10 +17,10 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
 
   isLoading: boolean;
   id: number = 0;
-  deletionWarning: boolean = false;
-  editWarning: boolean = false;
+  deletionWarning: boolean = false; // flag for deletion message in modal
+  editWarning: boolean = false; // flag for editing message in modal
   player: Player | null = null;
-  message: string = null;
+  message: string = null; // message for modal
   modalMessage: ModalMessage;
   // player: Player | null
   //   = {
@@ -65,12 +65,18 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * set flag for deletion to true
+   */
   onDeleteClick() {
     // console.log('for delete');
     this.deletionWarning = true;
     this.message = 'Do you really want to delete this player?'
   }
 
+  /**
+   * set deletion flag to false
+   */
   cancelDeletionWarning() {
     this.deletionWarning = false;
   }
@@ -80,6 +86,9 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
     this.message = 'Do you really want to edit this player?'
   }
 
+  /**
+   * set editing flag to false
+   */
   cancelEditWarning() {
     this.editWarning = false;
   }
@@ -104,8 +113,6 @@ export class PlayerDetailsComponent implements OnInit, OnDestroy {
           this.modalMessage = {message:'You have successfully deleted player ' + this.player.currentName};
           this.appService.modalMessage.next( this.modalMessage);
           this.router.navigate(['/members']);
-
-
         },
         error: err => {
           this.appService.handleRequestError(err);

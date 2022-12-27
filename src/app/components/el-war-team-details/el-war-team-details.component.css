@@ -13,3 +13,11 @@
   padding: 2px;
   margin: 3rem;
 }
+
+.btn-group-sm {
+  text-align: start;
+}
+
+.btn-group-sm button {
+  margin-right: 1rem;
+}

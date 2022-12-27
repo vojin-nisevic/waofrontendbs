@@ -13,6 +13,7 @@ import { RouterLinkWithHref } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { TextToIntegerValidateDirective } from '../directives/text-to-integer-validate.directive';
 import { ValidateSelectDirective } from '../directives/validate-select.directive';
+import { ElWarTeamAddComponent } from './el-war-team-add/el-war-team-add.component';
 
 
 
@@ -28,6 +29,7 @@ import { ValidateSelectDirective } from '../directives/validate-select.directive
     PlayerAddComponent,
     TextToIntegerValidateDirective,
     ValidateSelectDirective,
+    ElWarTeamAddComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,11 @@
+.container-fluid {
+  margin-top: 2rem;
+}
+
+.btn-group-sm button {
+  margin-right: 2rem !important;
+}
+
+.form-check label {
+  display: block;
+}

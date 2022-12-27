@@ -1,4 +1,4 @@
-<div class="container col-12" *ngIf="team">
+<div class="container-fluid" *ngIf="team">
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 alert alert-info">
@@ -51,29 +51,54 @@
     <div class="col-12 table-responsive">
       <div class="table">
         <thead>
-        <th>Select</th>
+<!--        <th>Select</th>-->
         <th>Current name</th>
         <th>Castle</th>
-        <th>March</th>
-        <th>Attack</th>
-        <th>HP</th>
+<!--        <th>March</th>-->
+<!--        <th>Attack</th>-->
+<!--        <th>HP</th>-->
         <th>Front row</th>
         <th>Back row</th>
         </thead>
         <tbody *ngFor="let player of players">
-        <td><input type="checkbox" name="pl" [value]="player.id" (change)="onCheck($event)"></td>
+<!--        <td><input type="checkbox" id="pl" name="pl" [value]="player.id" (change)="onCheck($event)"></td>-->
         <td>{{player.currentName}}</td>
         <td>{{player.castleLevel}}</td>
-        <td>{{player.marchSize | number: '2.0'}}</td>
-        <td>{{player.attack}}</td>
-        <td>{{player.hp}}</td>
+<!--        <td>{{player.marchSize | number: '2.0'}}</td>-->
+<!--        <td>{{player.attack}}</td>-->
+<!--        <td>{{player.hp}}</td>-->
         <td>{{player.frontRow.name}}</td>
         <td>{{player.backRow.name}}</td>
         </tbody>
       </div>
     </div>
+    <br>
+    <hr>
+    <div class="btn-group-sm">
+      <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="onEditClick()">Edit</button>
+      <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="onDeleteClick()">Delete</button>
+    </div>
   </div>
   <div *ngIf="!players">
     <h3>NO PLAYERS IN THIS TEAM</h3>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEliteWarTeam" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEliteWarTeam">Warning</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="message">
+        {{message}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onConfirmAction()">Proceed</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
   </div>
 </div>

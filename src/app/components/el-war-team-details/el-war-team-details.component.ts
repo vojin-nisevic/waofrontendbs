@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ElWarTeam } from "../../models/el-war-team";
 import { PlayerElWarDto } from "../../models/dto/player-el-war-dto";
 import { PlayersService } from "../../services/players.service";
@@ -12,6 +12,10 @@ import { AppService } from "../../global/app.service";
   styleUrls: ['./el-war-team-details.component.css']
 })
 export class ElWarTeamDetailsComponent implements OnInit {
+
+  message: string = null; // message for modal
+  deletionWarning: boolean = false; // flag for deletion message in modal
+  editWarning: boolean = false; // flag for editing message in modal
 
   @Input() team?: ElWarTeam;
   players: PlayerElWarDto[];
@@ -52,16 +56,16 @@ export class ElWarTeamDetailsComponent implements OnInit {
     });
 
     //fetch players by team
-    this.playerService.getPlayersByTeam(this.id).subscribe({
-      next: value => {
-        this.players = value;
-        this.calculateStats();
-        // console.log(value);
-      },
-      error: err => {
-        this.appService.handleRequestError(err);
-      }
-    });
+    // this.playerService.getPlayersByTeam(this.id).subscribe({
+    //   next: value => {
+    //     this.players = value;
+    //     this.calculateStats();
+    //     // console.log(value);
+    //   },
+    //   error: err => {
+    //     this.appService.handleRequestError(err);
+    //   }
+    // });
   }
 
   //calculates stats for team
@@ -79,15 +83,75 @@ export class ElWarTeamDetailsComponent implements OnInit {
       this.avgMarch = arrMarch.reduce((a, b) => a + b) / arrMarch.length;
       this.maxMarch = arrMarch.reduce((a, b) => a > b ? a : b);
       this.minMarch = arrMarch.reduce((a, b) => a < b ? a : b);
-      console.log(arrMarch);
-      // this.avgHP = (this.players.flatMap(pl => pl.hp))
-
     }
   }
 
   onCheck(e: any){
-    console.log(e.target);
+    // console.log(e.target);
     console.log(e.target.checked);
+    console.log(e.target.value);
   }
 
+  /**
+   * set flag for deletion to true
+   */
+  onDeleteClick() {
+    // console.log('for delete');
+    this.deletionWarning = true;
+    this.message = 'Do you really want to delete this team?'
+  }
+
+  /**
+   * set deletion flag to false
+   */
+  cancelDeletionWarning() {
+    this.deletionWarning = false;
+    this.message = null;
+  }
+
+  onEditClick() {
+    console.log('EDITING');
+    this.editWarning = true;
+    this.message = 'Do you really want to edit this team?';
+    console.log(this.message);
+  }
+
+  /**
+   * set editing flag to false
+   */
+  cancelEditWarning() {
+    this.editWarning = false;
+    this.message = null;
+  }
+
+  /**
+   * check flags (delete or edit) and performs an action
+   */
+  onConfirmAction() {
+    if (this.deletionWarning) {
+      this.deleteTeam();
+      this.cancelDeletionWarning();
+    }
+    else {
+      this.editTeam();
+      this.cancelEditWarning();
+    }
+  }
+
+  /**
+   * deletes team
+   * @private
+   */
+  private deleteTeam() {
+    console.log('DELETE ACTION');
+  }
+
+  /**
+   * navigates to component for team editing
+   * @private
+   */
+  private editTeam() {
+    this.message = null;
+    this.router.navigate(['/el-war-team-edit/' + this.team.id]);
+  }
 }
